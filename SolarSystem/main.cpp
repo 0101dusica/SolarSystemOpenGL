@@ -59,6 +59,7 @@ int main() {
         return -1;
     }
     glfwMakeContextCurrent(window);
+    glfwSwapInterval(1); // Enables VSync (limits to 60 FPS)
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     glfwSetScrollCallback(window, [](GLFWwindow*, double, double yoffset) {
         camera.Radius -= (float)yoffset * 10.0f;
@@ -73,6 +74,9 @@ int main() {
     }
 
     glEnable(GL_DEPTH_TEST);
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_BACK);
+    glFrontFace(GL_CCW);
 
     // Load shaders and bind texture unit 
     Shader planetShader("planet.vs", "planet.fs");
