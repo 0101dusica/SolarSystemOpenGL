@@ -29,13 +29,24 @@ float lastFrame = 0.0f;
 bool rotatePlanets = true;
 bool spacePressedLastFrame = false;
 
+// Loads a texture from file using stb_image
 unsigned int loadTexture(const char* path);
+
+// Callback to adjust viewport when window is resized
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+
+// Handles keyboard input (WASD + SPACE)
 void processInput(GLFWwindow* window);
+
+// Sets up a fullscreen quad for rendering the background texture
 void setupQuad(unsigned int& quadVAO, unsigned int& quadVBO);
+
+// Initializes the sun and creates all planet objects with texture and movement properties
 void setupPlanets(Planet& sun, std::vector<Planet*>& planets);
 
+
 int main() {
+    // Initialize GLFW and create window
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -55,6 +66,7 @@ int main() {
         camera.updatePosition();
         });
 
+    // Load OpenGL functions using GLAD 
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
         std::cout << "Failed to initialize GLAD" << std::endl;
         return -1;
@@ -62,28 +74,33 @@ int main() {
 
     glEnable(GL_DEPTH_TEST);
 
+    // Load shaders and bind texture unit 
     Shader planetShader("planet.vs", "planet.fs");
     Shader backgroundShader("background.vs", "background.fs");
     Shader orbitShader("orbit.vs", "orbit.fs");
     planetShader.Use();
     planetShader.setInt("texture1", 0);
 
+    // Create Sun and planets 
     Planet sun(25.0f, 48, 24);
     std::vector<Planet*> planets;
     setupPlanets(sun, planets);
 
+    // Load background (stars) texture and quad 
     unsigned int starsTexture = loadTexture("assets/stars.jpg");
-
     unsigned int quadVAO, quadVBO;
     setupQuad(quadVAO, quadVBO);
 
+    // Initialize text rendering system 
     Text myText("C:/Windows/Fonts/arial.ttf", 24);
 
     static float animationTime = 0.0f;
     static float pauseStart = 0.0f;
     static bool wasPaused = false;
 
+    // Main render loop 
     while (!glfwWindowShouldClose(window)) {
+        // Frame timing 
         float currentFrame = glfwGetTime();
         deltaTime = currentFrame - lastFrame;
         lastFrame = currentFrame;
@@ -92,6 +109,7 @@ int main() {
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+        // Render background 
         glDisable(GL_DEPTH_TEST);
         backgroundShader.Use();
         glBindVertexArray(quadVAO);
@@ -100,9 +118,11 @@ int main() {
         glBindVertexArray(0);
         glEnable(GL_DEPTH_TEST);
 
+        // Setup camera projection and view 
         glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH / SCR_HEIGHT, 0.1f, 1000.0f);
         glm::mat4 view = camera.GetViewMatrix();
 
+        // Render planet orbits 
         orbitShader.Use();
         orbitShader.setMat4("projection", projection);
         orbitShader.setMat4("view", view);
@@ -112,6 +132,7 @@ int main() {
             planet->DrawOrbit();
         }
 
+        // Handle pause/play animation 
         if (rotatePlanets) {
             if (wasPaused) {
                 animationTime += glfwGetTime() - pauseStart;
@@ -124,8 +145,10 @@ int main() {
                 wasPaused = true;
             }
         }
+
         float t = rotatePlanets ? glfwGetTime() - animationTime : pauseStart - animationTime;
 
+        // Render Sun 
         planetShader.Use();
         planetShader.setMat4("projection", projection);
         planetShader.setMat4("view", view);
@@ -135,6 +158,7 @@ int main() {
         glBindTexture(GL_TEXTURE_2D, sun.textureID);
         sun.Draw();
 
+        // Render planets with rotation and orbit 
         for (auto* planet : planets) {
             glm::mat4 model = glm::rotate(glm::mat4(1.0f), t * planet->orbitSpeed, glm::vec3(0.0f, 1.0f, 0.0f));
             model = glm::translate(model, glm::vec3(
@@ -145,6 +169,7 @@ int main() {
             planet->Draw();
         }
 
+        // Render text
         int width, height;
         glfwGetFramebufferSize(window, &width, &height);
         glm::mat4 orthoProj = glm::ortho(0.0f, (float)width, 0.0f, (float)height);
@@ -153,7 +178,7 @@ int main() {
         float x = width - 300.0f;
         float y = 30.0f;
         glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); 
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         myText.RenderText("SV 42/2021 Dusica Trbovic", x, y, 1.0f, glm::vec3(1, 1, 1));
 
         glfwSwapBuffers(window);
