@@ -30,10 +30,16 @@
     <ClCompile Include="..\..\..\..\..\Program Files\glad\src\glad.c">
       <Filter>Source Files\additionalFiles</Filter>
     </ClCompile>
-    <ClCompile Include="Shader.cpp">
+    <ClCompile Include="Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Camera.cpp">
+    <ClCompile Include="Planet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Orbit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -44,12 +50,42 @@
     <ClInclude Include="Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Program Files\glad\include\glad\glad.h">
+      <Filter>Header Files\additionalFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Program Files\glad\include\KHR\khrplatform.h">
+      <Filter>Header Files\additionalFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="stb_image.h">
+      <Filter>Header Files\additionalFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Program Files\freetype-windows-binaries\include\ft2build.h">
+      <Filter>Header Files\additionalFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Orbit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Planet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="background.fs">
       <Filter>Shaders</Filter>
     </None>
     <None Include="background.vs">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="orbit.vs">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="orbit.fs">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="planet.vs">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="planet.fs">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>

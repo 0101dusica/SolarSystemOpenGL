@@ -133,15 +133,27 @@
     <ClCompile Include="..\..\..\..\..\Program Files\glad\src\glad.c" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Orbit.cpp" />
+    <ClCompile Include="Planet.cpp" />
     <ClCompile Include="Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\..\Program Files\freetype-windows-binaries\include\ft2build.h" />
+    <ClInclude Include="..\..\..\..\..\Program Files\glad\include\glad\glad.h" />
+    <ClInclude Include="..\..\..\..\..\Program Files\glad\include\KHR\khrplatform.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Orbit.h" />
+    <ClInclude Include="Planet.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="stb_image.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="background.fs" />
     <None Include="background.vs" />
+    <None Include="orbit.fs" />
+    <None Include="orbit.vs" />
+    <None Include="planet.fs" />
+    <None Include="planet.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
