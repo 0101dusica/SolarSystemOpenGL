@@ -18,6 +18,7 @@
 #include "Camera.h"
 #include "Shader.h"
 #include "Planet.h"
+#include "Text.h"
 
 const unsigned int SCR_WIDTH = 1800;
 const unsigned int SCR_HEIGHT = 1400;
@@ -75,6 +76,8 @@ int main() {
 
     unsigned int quadVAO, quadVBO;
     setupQuad(quadVAO, quadVBO);
+
+    Text myText("C:/Windows/Fonts/arial.ttf", 24);
 
     static float animationTime = 0.0f;
     static float pauseStart = 0.0f;
@@ -145,11 +148,13 @@ int main() {
         int width, height;
         glfwGetFramebufferSize(window, &width, &height);
         glm::mat4 orthoProj = glm::ortho(0.0f, (float)width, 0.0f, (float)height);
+        myText.SetProjection(orthoProj);
 
         float x = width - 300.0f;
         float y = 30.0f;
         glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); 
+        myText.RenderText("SV 42/2021 Dusica Trbovic", x, y, 1.0f, glm::vec3(1, 1, 1));
 
         glfwSwapBuffers(window);
         glfwPollEvents();

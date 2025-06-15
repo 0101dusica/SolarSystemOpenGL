@@ -136,6 +136,7 @@
     <ClCompile Include="Orbit.cpp" />
     <ClCompile Include="Planet.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="Text.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\..\Program Files\freetype-windows-binaries\include\ft2build.h" />
@@ -146,6 +147,7 @@
     <ClInclude Include="Planet.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="stb_image.h" />
+    <ClInclude Include="Text.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="background.fs" />
@@ -154,6 +156,8 @@
     <None Include="orbit.vs" />
     <None Include="planet.fs" />
     <None Include="planet.vs" />
+    <None Include="text.fs" />
+    <None Include="text.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -42,6 +42,9 @@
     <ClCompile Include="Shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Text.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Shader.h">
@@ -68,6 +71,9 @@
     <ClInclude Include="Planet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Text.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="background.fs">
@@ -86,6 +92,12 @@
       <Filter>Shaders</Filter>
     </None>
     <None Include="planet.fs">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="text.fs">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="text.vs">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>
